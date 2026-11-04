@@ -3,118 +3,440 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index,follow">
-  <meta name="description" content="Privacy Policy for the NovaTune Android music player.">
-  <title>Privacy Policy | NovaTune</title>
+  <meta name="theme-color" content="#0b0b16">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="NovaTune Privacy Policy. Learn how NovaTune accesses on-device music, uses Android permissions, and works with Google Mobile Ads and Google's consent tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Privacy Policy · NovaTune">
+  <meta property="og:description" content="How NovaTune handles on-device music, app preferences, permissions, advertising and privacy choices.">
+  <title>Privacy Policy · NovaTune</title>
   <style>
-    :root { color-scheme: light; --ink:#202033; --muted:#5e6073; --line:#e7e5ef; --accent:#7042c7; --soft:#f5f1ff; }
+    :root {
+      color-scheme: dark;
+      --bg: #090912;
+      --bg-2: #0e0d1b;
+      --panel: rgba(23, 21, 42, .82);
+      --panel-2: #17152a;
+      --panel-3: #1d1935;
+      --line: rgba(190, 174, 255, .14);
+      --line-strong: rgba(190, 174, 255, .24);
+      --text: #f5f2ff;
+      --muted: #b5aecb;
+      --soft: #89839f;
+      --accent: #b69aff;
+      --accent-2: #8c75f5;
+      --cyan: #82d9ed;
+      --good: #8ed9bd;
+      --max: 1160px;
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+    }
+
     * { box-sizing: border-box; }
-    body { margin:0; padding:32px 16px 56px; background:#f7f7fb; color:var(--ink); font:16px/1.68 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    main { width:min(820px,100%); margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:22px; padding:clamp(22px,5vw,48px); box-shadow:0 12px 40px rgba(27,18,54,.06); }
-    .brand { display:flex; align-items:center; gap:12px; color:var(--accent); font-weight:750; letter-spacing:.08em; text-transform:uppercase; font-size:13px; }
-    .mark { display:grid; place-items:center; width:42px; height:42px; border-radius:14px; background:linear-gradient(140deg,#a44cff,#5630b8); color:#fff; font-size:23px; }
-    h1 { margin:25px 0 6px; font-size:clamp(30px,5vw,42px); line-height:1.15; letter-spacing:-.03em; }
-    .updated { color:var(--muted); margin:0 0 26px; font-size:14px; }
-    .notice { padding:15px 17px; border:1px solid #eadfff; border-left:4px solid var(--accent); border-radius:12px; background:var(--soft); color:#33244f; margin:24px 0; }
-    h2 { font-size:21px; line-height:1.3; margin:30px 0 9px; }
-    p { margin:9px 0 13px; }
-    ul { padding-left:23px; margin:8px 0 16px; }
-    li { margin:6px 0; }
-    a { color:#5e35b1; text-decoration:underline; text-underline-offset:3px; overflow-wrap:anywhere; }
-    .meta { padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:#fcfbff; }
-    .meta p { margin:4px 0; }
-    footer { margin-top:34px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
-    @media (max-width:520px) { body { padding:12px 8px 28px; } main { border-radius:16px; } }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(112, 76, 210, .20), transparent 34rem),
+        radial-gradient(ellipse at 92% 22%, rgba(55, 127, 174, .11), transparent 30rem),
+        linear-gradient(180deg, #0b0a16 0%, var(--bg) 45%, #080810 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: #c7b4ff; text-decoration: underline; text-decoration-color: rgba(199,180,255,.45); text-underline-offset: 3px; }
+    a:hover { color: #e1d7ff; text-decoration-color: currentColor; }
+    a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; border-radius: 4px; }
+    p { margin: 0 0 14px; color: var(--muted); }
+    strong { color: var(--text); font-weight: 650; }
+    ul { margin: 10px 0 18px; padding-left: 22px; color: var(--muted); }
+    li { margin: 7px 0; padding-left: 3px; }
+    li::marker { color: var(--accent); }
+
+    .skip-link {
+      position: absolute; left: 16px; top: -60px; z-index: 100;
+      padding: 10px 14px; border-radius: 10px; background: #fff; color: #111;
+    }
+    .skip-link:focus { top: 12px; }
+    .shell { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(9, 9, 18, .78);
+      border-bottom: 1px solid rgba(190,174,255,.10);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center; flex: 0 0 auto;
+      border: 1px solid rgba(201,181,255,.38); border-radius: 14px;
+      background: linear-gradient(145deg, rgba(160,125,255,.30), rgba(74,55,130,.22));
+      box-shadow: inset 0 1px rgba(255,255,255,.12), 0 8px 24px rgba(103,75,190,.18);
+    }
+    .brand-mark svg { width: 23px; height: 23px; }
+    .brand-name { display: block; font-weight: 760; font-size: 17px; letter-spacing: .015em; line-height: 1.2; }
+    .brand-sub { display: block; color: var(--soft); font-size: 10px; letter-spacing: .18em; font-weight: 700; margin-top: 4px; }
+    .top-link { color: var(--muted); font-size: 13px; text-decoration: none; }
+    .top-link:hover { color: var(--text); }
+
+    .hero { position: relative; padding: 78px 0 48px; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%;
+      right: -230px; top: -275px; pointer-events: none;
+      background: radial-gradient(circle, rgba(145,112,255,.16), transparent 68%);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 290px; align-items: end; gap: 46px; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #c7b8f5; font-size: 11px; font-weight: 750; letter-spacing: .19em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 23px; height: 1px; background: var(--accent); box-shadow: 0 0 12px rgba(182,154,255,.7); }
+    h1 { margin: 18px 0 16px; max-width: 730px; font-size: clamp(42px, 6.4vw, 72px); line-height: .99; letter-spacing: -.055em; font-weight: 790; }
+    h1 span { display: block; color: #b8a3ff; }
+    .hero-copy { max-width: 700px; font-size: 16px; line-height: 1.8; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
+    .meta-pill { display: inline-flex; gap: 8px; align-items: center; padding: 7px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(25,22,45,.62); color: #c5bfd7; font-size: 11px; }
+    .meta-pill b { color: var(--text); font-weight: 650; }
+
+    .hero-art {
+      min-height: 178px; padding: 22px; border-radius: 26px; position: relative; overflow: hidden;
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(145deg, rgba(48,39,83,.82), rgba(16,20,39,.85));
+      box-shadow: var(--shadow);
+    }
+    .hero-art::before { content: ""; position: absolute; inset: auto -70px -115px auto; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(193,173,255,.16); box-shadow: 0 0 0 20px rgba(193,173,255,.025), 0 0 0 42px rgba(193,173,255,.018); }
+    .art-top { position: relative; color: #c9c0e4; font-size: 10px; letter-spacing: .16em; font-weight: 750; }
+    .art-title { position: relative; margin-top: 13px; font-size: 23px; font-weight: 740; letter-spacing: -.035em; line-height: 1.2; }
+    .art-caption { position: relative; margin-top: 8px; color: #aaa2c3; font-size: 12px; }
+    .wave { position: relative; display: flex; align-items: center; gap: 5px; height: 30px; margin-top: 17px; }
+    .wave i { width: 4px; border-radius: 8px; display: block; background: linear-gradient(180deg, #c9b8ff, #7d70df); opacity: .9; }
+    .wave i:nth-child(1), .wave i:nth-child(12) { height: 8px; opacity: .45; }
+    .wave i:nth-child(2), .wave i:nth-child(11) { height: 14px; opacity: .58; }
+    .wave i:nth-child(3), .wave i:nth-child(10) { height: 19px; }
+    .wave i:nth-child(4), .wave i:nth-child(9) { height: 26px; }
+    .wave i:nth-child(5), .wave i:nth-child(8) { height: 17px; }
+    .wave i:nth-child(6), .wave i:nth-child(7) { height: 11px; }
+
+    .notice { margin: 6px 0 34px; padding: 18px 20px; display: grid; grid-template-columns: 32px 1fr; gap: 13px; border: 1px solid rgba(142,217,189,.20); border-radius: 18px; background: linear-gradient(100deg, rgba(40,100,82,.13), rgba(26,23,45,.60)); }
+    .notice-icon { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 10px; background: rgba(142,217,189,.13); color: var(--good); font-weight: 800; }
+    .notice p { margin: 0; font-size: 13px; }
+
+    .layout { display: grid; grid-template-columns: 238px minmax(0, 1fr); align-items: start; gap: 30px; padding-bottom: 90px; }
+    .toc {
+      position: sticky; top: 98px; padding: 18px 14px 16px; border-radius: 20px;
+      border: 1px solid var(--line); background: rgba(18,17,32,.75);
+    }
+    .toc-title { padding: 0 10px 12px; color: #a9a0c1; font-size: 10px; letter-spacing: .17em; font-weight: 760; text-transform: uppercase; }
+    .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: nav; }
+    .toc li { margin: 2px 0; padding: 0; counter-increment: nav; }
+    .toc a { display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border-radius: 10px; color: #aaa4bd; font-size: 12px; text-decoration: none; line-height: 1.4; transition: background .18s ease, color .18s ease; }
+    .toc a::before { content: counter(nav, decimal-leading-zero); color: #786e9c; font-size: 10px; font-variant-numeric: tabular-nums; }
+    .toc a:hover { color: var(--text); background: rgba(155,126,255,.10); }
+    .content { min-width: 0; }
+    .section {
+      scroll-margin-top: 105px; margin: 0 0 17px; padding: clamp(22px, 3.1vw, 34px);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(25,23,45,.90), rgba(16,16,29,.91));
+      box-shadow: 0 12px 35px rgba(0,0,0,.12);
+    }
+    .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .section-number { width: 36px; height: 36px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; color: #d6c9ff; background: rgba(155,126,255,.13); border: 1px solid rgba(182,154,255,.18); font-size: 12px; font-weight: 760; font-variant-numeric: tabular-nums; }
+    h2 { margin: 0; font-size: clamp(20px, 2.6vw, 25px); line-height: 1.25; letter-spacing: -.025em; }
+    h3 { margin: 23px 0 9px; color: #e7e0fa; font-size: 15px; letter-spacing: -.01em; }
+    .section > :last-child, .section p:last-child { margin-bottom: 0; }
+    .callout { margin: 16px 0; padding: 16px 18px; border-left: 3px solid var(--accent-2); border-radius: 0 13px 13px 0; background: rgba(120,95,207,.10); }
+    .callout p { margin: 0; font-size: 14px; }
+    .data-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin: 18px 0 4px; }
+    .data-card { min-width: 0; padding: 17px; border: 1px solid rgba(190,174,255,.12); border-radius: 16px; background: rgba(255,255,255,.025); }
+    .data-card .kicker { margin-bottom: 7px; color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: 9px; font-weight: 800; }
+    .data-card h3 { margin: 0 0 6px; font-size: 14px; }
+    .data-card p { margin: 0; font-size: 12px; line-height: 1.65; }
+
+    .table-wrap { width: 100%; overflow-x: auto; margin: 17px 0 4px; border: 1px solid var(--line); border-radius: 15px; }
+    table { width: 100%; min-width: 570px; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 13px 15px; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(190,174,255,.10); }
+    th { color: #d9cff4; background: rgba(143,116,226,.10); font-size: 10px; text-transform: uppercase; letter-spacing: .10em; font-weight: 760; }
+    td { color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 620; width: 29%; }
+    tr:last-child td { border-bottom: 0; }
+    .small-note { color: var(--soft); font-size: 12px; }
+    .contact-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; margin-top: 18px; padding: 20px; border: 1px solid rgba(182,154,255,.24); border-radius: 17px; background: linear-gradient(110deg, rgba(113,82,190,.18), rgba(47,91,122,.10)); }
+    .contact-card p { margin: 4px 0 0; font-size: 12px; }
+    .email-link { display: inline-flex; align-items: center; gap: 9px; padding: 10px 15px; border-radius: 12px; color: #fff; background: linear-gradient(135deg, #8265d9, #6552ba); text-decoration: none; font-size: 13px; font-weight: 700; box-shadow: 0 8px 22px rgba(104,79,190,.2); }
+    .email-link:hover { color: #fff; filter: brightness(1.08); }
+    .footer { padding: 26px 0 42px; border-top: 1px solid rgba(190,174,255,.10); color: var(--soft); font-size: 12px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-brand { color: #d7ceeb; font-weight: 720; letter-spacing: .02em; }
+    .back-top { color: #bfb0ef; text-decoration: none; }
+
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+      .hero-art { max-width: 430px; min-height: 155px; }
+      .layout { grid-template-columns: 1fr; gap: 18px; }
+      .toc { position: relative; top: auto; padding: 14px; }
+      .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2px 7px; }
+      .toc a { padding: 7px 8px; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 28px, var(--max)); }
+      .topbar-inner { min-height: 66px; }
+      .brand-mark { width: 38px; height: 38px; border-radius: 12px; }
+      .top-link { font-size: 11px; }
+      .hero { padding: 54px 0 34px; }
+      h1 { font-size: clamp(40px, 13vw, 58px); }
+      .hero-copy { font-size: 14px; }
+      .hero-art { min-height: 150px; }
+      .notice { padding: 14px; grid-template-columns: 29px 1fr; gap: 10px; }
+      .layout { padding-bottom: 54px; }
+      .toc ol { grid-template-columns: 1fr 1fr; }
+      .toc a { font-size: 11px; }
+      .section { padding: 21px 18px; border-radius: 18px; }
+      .section-head { align-items: flex-start; gap: 11px; }
+      .section-number { width: 32px; height: 32px; border-radius: 10px; }
+      .data-grid { grid-template-columns: 1fr; }
+      .contact-card { align-items: flex-start; }
+      .email-link { width: 100%; justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+    @media print {
+      :root { color-scheme: light; --text: #15131b; --muted: #34313d; --soft: #575361; --line: #d8d4e1; }
+      body { background: #fff; color: #15131b; font-size: 11pt; }
+      .topbar, .toc, .hero-art, .back-top, .skip-link { display: none !important; }
+      .shell { width: 100%; }
+      .hero { padding: 20px 0; }
+      h1 span { color: #5c479e; }
+      .layout { display: block; padding: 0; }
+      .section { break-inside: avoid; background: #fff; box-shadow: none; border: 1px solid #ddd; margin-bottom: 12px; }
+      p, li, td { color: #333 !important; }
+      a { color: #34216d; }
+      .footer { border-color: #ddd; }
+    }
   </style>
 </head>
 <body>
-<main>
-  <div class="brand"><span class="mark" aria-hidden="true">♫</span><span>NovaTune</span></div>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Effective date: November 2, 2026 · App: NovaTune · Android package: com.brand.novatune</p>
+  <a class="skip-link" href="#main">Skip to privacy policy</a>
 
-  <div class="meta">
-    <p><strong>Developer / Publisher:</strong> MaDuWa</p>
-    <p><strong>Privacy contact:</strong> <a href="mailto:devnovastudios@gmail.com">devnovastudios@gmail.com</a></p>
-  </div>
+  <header class="topbar" id="top">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="NovaTune home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.1 3.5v12.2a3.35 3.35 0 1 1-2-3.06V7.1l7-1.7v8.3a3.35 3.35 0 1 1-2-3.06V3.5h-3Z" fill="url(#g)"/>
+            <defs><linearGradient id="g" x1="8" y1="3" x2="19" y2="19" gradientUnits="userSpaceOnUse"><stop stop-color="#E1D5FF"/><stop offset="1" stop-color="#9B7BFF"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span><span class="brand-name">NovaTune</span><span class="brand-sub">LISTEN YOUR WAY</span></span>
+      </a>
+      <a class="top-link" href="mailto:devnovastudios@gmail.com">Privacy questions? Contact us ↗</a>
+    </div>
+  </header>
 
-  <h2>1. About this policy</h2>
-  <p>This Privacy Policy explains how NovaTune ("NovaTune", "we", "us", or "our") accesses, uses, stores, and shares information when you use the NovaTune Android music player. It applies to the app package <strong>com.brand.novatune</strong>.</p>
-  <p>This policy describes the project version reviewed on November 2, 2026. If the app adds analytics, accounts, cloud services, new advertising partners, or other data-processing features, this policy and the Google Play Data safety declaration must be updated before that version is released.</p>
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow">Your privacy matters</div>
+          <h1>Privacy <span>Policy.</span></h1>
+          <p class="hero-copy">This policy explains how NovaTune accesses music on your device, uses app permissions, stores your preferences, and works with Google advertising and privacy services.</p>
+          <div class="meta-row" aria-label="Policy information">
+            <span class="meta-pill"><b>Effective:</b> November 5, 2026</span>
+            <span class="meta-pill"><b>App:</b> NovaTune</span>
+            <span class="meta-pill"><b>Android package:</b> com.brand.novatune</span>
+          </div>
+        </div>
+        <aside class="hero-art" aria-label="NovaTune audio identity">
+          <div class="art-top">NOVATUNE · PRIVACY CENTER</div>
+          <div class="art-title">Your music.<br>On your device.</div>
+          <div class="art-caption">Clear information. Thoughtful choices.</div>
+          <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </aside>
+      </div>
+    </section>
 
-  <h2>2. Information handled on your device</h2>
-  <p>NovaTune is designed to play audio stored on your device. In the reviewed version, the app does not require you to create an account and does not include a NovaTune-operated account server or cloud music library.</p>
-  <ul>
-    <li><strong>Music library and metadata:</strong> When you grant music/audio access, NovaTune reads audio items available through Android's media library, such as track title, artist, duration, album information, file name, and available album artwork. This lets the app display and search your songs and build playback lists.</li>
-    <li><strong>Shared audio:</strong> When you choose NovaTune to open an audio file from another app, NovaTune reads the audio item that Android shares with it so you can play it. The app does not send that audio file to the NovaTune developer.</li>
-    <li><strong>App preferences:</strong> Favorites, custom playlist information, playback and equalizer preferences, visualizer style and colour choices, appearance settings, permission choices, and limited ad-frequency settings are stored in the app's private on-device storage.</li>
-  </ul>
-  <p>NovaTune does not upload your music files, music-library contents, favorites, or custom playlists to a NovaTune server in the reviewed version. The app may read the metadata needed to display and play a track. It does not modify your music files during ordinary playback. If you use a delete feature, Android asks you to approve the requested deletion of the selected audio item.</p>
+    <div class="shell">
+      <div class="notice" role="note">
+        <div class="notice-icon" aria-hidden="true">✓</div>
+        <p><strong>At a glance:</strong> NovaTune is an on-device music player. It does not require an account or operate its own cloud music library. Your music files, favorites and playlists are not uploaded to a NovaTune server. The app does include Google Mobile Ads, which may collect and share certain advertising, interaction, diagnostic and device information as explained below.</p>
+      </div>
 
-  <h2>3. Permissions and how they are used</h2>
-  <ul>
-    <li><strong>Music and audio access</strong> (READ_MEDIA_AUDIO on supported Android versions, or READ_EXTERNAL_STORAGE on older versions): used to find and play audio stored on your device and show its metadata.</li>
-    <li><strong>Display over other apps</strong> (SYSTEM_ALERT_WINDOW): used only if you enable the optional floating player, so its playback controls can appear over another app. The permission itself does not mean NovaTune records what is displayed in other apps.</li>
-    <li><strong>Microphone / audio permission</strong> (RECORD_AUDIO): Android requires this permission for the playback visualizer API used by NovaTune. In the reviewed implementation, the visualizer analyses the currently playing device audio locally to draw visual effects. NovaTune does not intentionally record your voice, create microphone recordings, save audio samples, or upload microphone audio. You can decline this permission; live visualizer effects will then be unavailable.</li>
-    <li><strong>Network access</strong> (INTERNET and ACCESS_NETWORK_STATE): used by the Google Mobile Ads SDK to request and display advertisements and to support its related services.</li>
-    <li><strong>Playback service and wake lock</strong>: used to continue audio playback and maintain playback while the screen is off. These features do not provide NovaTune with your precise location.</li>
-  </ul>
-  <p>NovaTune does not request GPS/location, contacts, camera, photos, or video-library permissions in the reviewed manifest. Your Android settings let you review or revoke app permissions. Some features will not work if their required permission is denied.</p>
+      <div class="layout">
+        <nav class="toc" aria-label="Privacy policy contents">
+          <div class="toc-title">On this page</div>
+          <ol>
+            <li><a href="#about">About this policy</a></li>
+            <li><a href="#device-data">Information on your device</a></li>
+            <li><a href="#permissions">Permissions and features</a></li>
+            <li><a href="#advertising">Advertising and Google</a></li>
+            <li><a href="#sharing">When information is shared</a></li>
+            <li><a href="#retention">Storage and deletion</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#children">Children's privacy</a></li>
+            <li><a href="#choices">Your choices</a></li>
+            <li><a href="#changes">Policy changes</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ol>
+        </nav>
 
-  <h2>4. Advertising and information shared with Google</h2>
-  <p>The reviewed version includes the Google Mobile Ads SDK (AdMob) and displays banner, native, interstitial, app-open, and rewarded advertisements. The SDK may automatically collect and share certain information with Google for advertising, ad measurement, analytics, and fraud prevention. Depending on the SDK version, features used, device settings, and applicable consent choices, this may include:</p>
-  <ul>
-    <li>IP address, which may be used to estimate a device's general location;</li>
-    <li>app and advertising interactions, such as app launches, taps, and ad/video views;</li>
-    <li>diagnostic and performance information, such as app launch time, hangs, and energy/performance signals;</li>
-    <li>device and account identifiers, such as the Android advertising ID, App Set ID, and other applicable identifiers.</li>
-  </ul>
-  <p>Google and its advertising or service partners may use this information to deliver ads, measure ad performance, manage ad frequency, prevent invalid activity and fraud, and, where permitted by applicable law and the user's settings and choices, provide personalised advertising. NovaTune's developer does not receive your local music files or playlists through the AdMob integration.</p>
-  <p>Google states that data collected by the Google Mobile Ads SDK is encrypted in transit using TLS. Google's handling of information is also governed by Google's own policies:</p>
-  <ul>
-    <li><a href="https://policies.google.com/privacy">Google Privacy Policy</a></li>
-    <li><a href="https://developers.google.com/admob/android/privacy/play-data-disclosure">Google Mobile Ads SDK data disclosure</a></li>
-    <li><a href="https://myadcenter.google.com/">Google My Ad Center</a></li>
-  </ul>
-  <p>NovaTune does not sell your local music files, playlists, or locally stored app preferences. The advertising SDK's collection and sharing described above is performed by the third-party advertising service, not by a NovaTune-operated analytics server.</p>
+        <div class="content">
+          <section class="section" id="about">
+            <div class="section-head"><span class="section-number">01</span><h2>About this policy</h2></div>
+            <p>This Privacy Policy applies to the NovaTune Android application (<strong>NovaTune</strong>, package <strong>com.brand.novatune</strong>). It describes how the app accesses, uses, stores and shares information when you use its music-player features.</p>
+            <p><strong>Developer / Publisher:</strong> MaDuWa<br><strong>Privacy contact:</strong> <a href="mailto:devnovastudios@gmail.com">devnovastudios@gmail.com</a></p>
+            <p>NovaTune is designed to play audio stored on your device. The app does not require you to create an account and does not operate a NovaTune account server or cloud music library.</p>
+            <p>This policy describes the app's current features and the third-party services integrated into it. If the app adds analytics, accounts, cloud services, advertising partners, or other data-processing features, this policy and the app's Google Play Data safety information will be reviewed and updated before the changed version is released.</p>
+          </section>
 
-  <h2>5. When information may be shared</h2>
-  <p>Other than the advertising SDK activity described above, NovaTune does not transmit your local music library or app preferences to the developer in the reviewed version. If you use Android's Share feature to send a track to another app, Android transfers the item you selected to the app you chose. That receiving app handles the item under its own privacy policy. We may also disclose information if required by applicable law or a valid legal process.</p>
+          <section class="section" id="device-data">
+            <div class="section-head"><span class="section-number">02</span><h2>Information handled on your device</h2></div>
+            <p>When you grant the relevant Android permissions or select an audio file to open, NovaTune accesses information needed to provide music playback and related features.</p>
+            <div class="data-grid">
+              <article class="data-card">
+                <div class="kicker">Music library</div>
+                <h3>Audio and track details</h3>
+                <p>NovaTune may read track title, artist, duration, album information, file name, media identifiers and available album artwork from Android's media library. This information helps display, organize, search and play your songs.</p>
+              </article>
+              <article class="data-card">
+                <div class="kicker">Shared content</div>
+                <h3>Audio opened from another app</h3>
+                <p>If you choose NovaTune to open or share an audio item from another app, Android provides access to the item you selected so NovaTune can play it. NovaTune does not send that audio file to the developer.</p>
+              </article>
+              <article class="data-card">
+                <div class="kicker">App storage</div>
+                <h3>Preferences and playlists</h3>
+                <p>Favorites, custom playlist information, playback and audio-effect preferences, visualizer style and colour choices, appearance settings, and limited ad-frequency settings are stored in the app's private on-device storage.</p>
+              </article>
+              <article class="data-card">
+                <div class="kicker">No NovaTune account</div>
+                <h3>No developer music cloud</h3>
+                <p>NovaTune does not upload your music files, music-library contents, favorites or custom playlists to a NovaTune-operated server in the current version.</p>
+              </article>
+            </div>
+            <div class="callout"><p><strong>Local music processing:</strong> NovaTune reads the media information needed to display and play a track. Ordinary playback does not modify your music files. A file is deleted only after you choose the delete action and complete the applicable Android authorization or confirmation flow.</p></div>
+          </section>
 
-  <h2>6. Storage, retention, and deletion</h2>
-  <ul>
-    <li>Music files remain in the locations managed by Android and the user. NovaTune does not maintain a separate server copy of your music library.</li>
-    <li>Favorites, playlists, and preferences are kept in the app's private storage on your device while the app is installed. You can clear NovaTune's app storage or uninstall the app to remove locally stored app data. Android device/cloud backup and restore settings may affect whether some app data is copied or restored by Android.</li>
-    <li>Audio files are removed only when you choose an applicable delete action and approve Android's system confirmation.</li>
-    <li>Advertising-related information collected by Google is retained and managed by Google under its policies and settings. NovaTune's developer does not control Google's retention periods.</li>
-  </ul>
-  <p>The reviewed version does not create user accounts, so it does not have a NovaTune account-deletion process. You can remove local app data by clearing storage or uninstalling the app. For data held by Google, use the Google privacy and advertising controls linked above.</p>
+          <section class="section" id="permissions">
+            <div class="section-head"><span class="section-number">03</span><h2>Permissions and how they are used</h2></div>
+            <p>NovaTune requests permissions for specific music-player features. You can review or revoke permissions in Android Settings. If you deny a permission, the feature that needs it may be unavailable.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Permission / access</th><th>Why NovaTune uses it</th></tr></thead>
+                <tbody>
+                  <tr><td>Music and audio access<br><span class="small-note">READ_MEDIA_AUDIO / READ_EXTERNAL_STORAGE</span></td><td>To find and play audio stored on your device and read the track information and artwork needed by the music library. The permission used depends on the Android version.</td></tr>
+                  <tr><td>Legacy storage write access<br><span class="small-note">WRITE_EXTERNAL_STORAGE · Android 9 / API 28 and earlier</span></td><td>Used only when you choose to delete an audio file from shared device storage on Android versions that require this legacy permission. Newer Android versions use the applicable system authorization flow.</td></tr>
+                  <tr><td>Microphone / audio permission<br><span class="small-note">RECORD_AUDIO</span></td><td>Required by Android's playback Visualizer API. When you enable the visualizer, NovaTune reads a partial, low-quality representation of the device's audio output mix to draw live visual effects. Because the app uses the output-mix audio session, this mix can include audio playing from other apps at the same time. This is not a microphone voice-recording feature: NovaTune does not intentionally make, save or upload voice recordings or audio samples.</td></tr>
+                  <tr><td>Audio settings<br><span class="small-note">MODIFY_AUDIO_SETTINGS</span></td><td>Used for playback audio features and to create the Android output-mix visualizer. Audio effects such as bass boost and virtualizer are applied to the active NovaTune playback audio session when available.</td></tr>
+                  <tr><td>Display over other apps<br><span class="small-note">SYSTEM_ALERT_WINDOW</span></td><td>Used only if you enable the optional floating player, so its playback controls can appear over another app. This permission does not give NovaTune a feature to record or read the contents of other apps' screens.</td></tr>
+                  <tr><td>Internet and network state<br><span class="small-note">INTERNET / ACCESS_NETWORK_STATE</span></td><td>Used by the Google Mobile Ads SDK to request and display ads and by related Google privacy/consent services. Network state is also checked so ad requests can be retried when a connection becomes available.</td></tr>
+                  <tr><td>Background playback<br><span class="small-note">WAKE_LOCK / foreground media playback service</span></td><td>Used to keep music playback and media controls working while the app is in the background or the screen is off. These permissions do not provide NovaTune with your GPS or precise location.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small-note">The reviewed app manifest does not request GPS/location, contacts, camera, or photo/video-library permissions.</p>
+          </section>
 
-  <h2>7. Security</h2>
-  <p>NovaTune uses Android's app permission and private-storage mechanisms for app data. The reviewed Android configuration disallows cleartext network traffic. Google states that data collected by its Mobile Ads SDK is encrypted in transit using TLS. No method of storage or transmission is completely secure, and we cannot guarantee absolute security.</p>
+          <section class="section" id="advertising">
+            <div class="section-head"><span class="section-number">04</span><h2>Advertising and information shared with Google</h2></div>
+            <p>The current version of NovaTune includes the <strong>Google Mobile Ads SDK (Legacy), version 25.5.0</strong>, and displays banner, native, interstitial, app-open and rewarded advertisements. The app also uses Google's User Messaging Platform (UMP) SDK to manage applicable consent and privacy messages.</p>
+            <h3>Information the Google Mobile Ads SDK may collect and share</h3>
+            <p>According to Google's disclosure for Google Mobile Ads SDK (Legacy) version 25.5.0, the SDK automatically collects and shares certain information for advertising, analytics, ad measurement and fraud-prevention purposes. Depending on the SDK, device, settings and applicable choices, this may include:</p>
+            <ul>
+              <li><strong>IP address:</strong> may be used to estimate a device's general location.</li>
+              <li><strong>User product interactions:</strong> information about app launches, taps, ad interactions and video views.</li>
+              <li><strong>Diagnostic information:</strong> app or SDK performance information, such as app launch time, hangs and energy/performance signals.</li>
+              <li><strong>Device and account identifiers:</strong> Android Advertising ID, App Set ID and, where applicable, other identifiers related to accounts signed in on the device.</li>
+            </ul>
+            <p>Google may use this information to deliver advertisements, measure ad performance, manage ad frequency, understand service performance and help detect invalid activity or fraud. Where permitted by applicable law and your settings or consent choices, it may also be used for personalized advertising. The Android Advertising ID is subject to the controls available in Android settings.</p>
+            <p>Google states that information collected by the Google Mobile Ads SDK (Legacy) is encrypted in transit using Transport Layer Security (TLS). Google's handling of information is also governed by its own privacy terms and controls.</p>
+            <h3>Google consent and privacy messages</h3>
+            <p>NovaTune requests updated consent information from Google's UMP SDK and displays a consent form when Google determines that one is required. Depending on the privacy message and applicable region, UMP may also require a privacy-options entry point. When required, a <strong>Privacy Choices</strong> option is made available in NovaTune Settings; selecting it opens Google's privacy-options form. The availability and choices shown can vary by region and applicable requirements.</p>
+            <p>UMP is a Google service. It communicates with Google to retrieve consent information and load applicable privacy messages. Consent status and form availability are managed through the UMP SDK; NovaTune does not operate a separate account-based consent database.</p>
+            <div class="callout"><p><strong>Important distinction:</strong> The advertising SDK may process device and advertising information as described above. This does not mean NovaTune sends your local music files, track library, favorites or custom playlists to the NovaTune developer. The developer does not receive those local music files or playlists through the app's AdMob integration.</p></div>
+            <h3>Google privacy resources</h3>
+            <ul>
+              <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
+              <li><a href="https://developers.google.com/admob/android/privacy/play-data-disclosure" target="_blank" rel="noopener noreferrer">Google Mobile Ads SDK (Legacy) data disclosure for Google Play</a></li>
+              <li><a href="https://developers.google.com/admob/android/privacy" target="_blank" rel="noopener noreferrer">Google UMP SDK privacy and consent setup</a></li>
+              <li><a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Google My Ad Center</a></li>
+            </ul>
+          </section>
 
-  <h2>8. Children's privacy</h2>
-  <p>NovaTune is a general music player and is not specifically designed as a child-directed service. The developer does not knowingly collect children's personal information through a NovaTune account system; the reviewed version has no account system. Advertising services may process device or advertising information as described in this policy. The app's target audience and advertising settings must be configured accurately in Google Play Console and AdMob before release.</p>
+          <section class="section" id="sharing">
+            <div class="section-head"><span class="section-number">05</span><h2>When information may be shared</h2></div>
+            <p>NovaTune does not transmit your local music library, music files, favorites or custom playlists to the developer in the current version. The main third-party data processing in the app is performed by Google's Mobile Ads and UMP services as described in Section 4.</p>
+            <ul>
+              <li><strong>Google:</strong> The Google Mobile Ads SDK may collect and share the advertising, interaction, diagnostic and device information listed above with Google and relevant service providers for the purposes described in Google's documentation.</li>
+              <li><strong>Apps you choose:</strong> If you use Android's Share feature to send an audio item to another app, Android transfers the item you selected to the app you chose. That receiving app handles the item under its own privacy policy.</li>
+              <li><strong>Legal requirements:</strong> Information may be disclosed if required by applicable law, regulation, court order or valid legal process.</li>
+            </ul>
+            <p>NovaTune does not sell your local music files, playlists or locally stored app preferences. No NovaTune-operated analytics or cloud music server is included in the reviewed project version.</p>
+          </section>
 
-  <h2>9. Your choices</h2>
-  <ul>
-    <li>You can allow or deny music/audio and visualizer permissions through Android permission prompts and Settings.</li>
-    <li>You can enable or disable the floating player through Android's special app access settings.</li>
-    <li>You can clear NovaTune's app storage or uninstall the app to remove locally stored app preferences and playlists.</li>
-    <li>You can manage available advertising and privacy choices through your Android settings and Google's privacy/ad controls. Choices and controls may vary by region, device, and Google service.</li>
-  </ul>
+          <section class="section" id="retention">
+            <div class="section-head"><span class="section-number">06</span><h2>Storage, retention and deletion</h2></div>
+            <ul>
+              <li><strong>Music files:</strong> Your music files remain in storage locations managed by Android and you. NovaTune does not maintain a separate server copy of your music library.</li>
+              <li><strong>App preferences:</strong> Favorites, playlist information and app preferences are kept in NovaTune's private on-device storage while the app is installed. You can clear NovaTune's app storage or uninstall the app to remove locally stored app data.</li>
+              <li><strong>Android backup:</strong> Android's backup and device-transfer features may back up or restore eligible app data according to Android's behavior and your device/account settings. NovaTune does not independently access or manage your Google account backups.</li>
+              <li><strong>Deleting a music file:</strong> Audio files are deleted only after you choose the delete action and complete the applicable Android permission or system confirmation flow. The exact confirmation steps depend on the Android version.</li>
+              <li><strong>Advertising information:</strong> Information collected by Google through its advertising services is retained and managed by Google under Google's policies and settings. NovaTune's developer does not control Google's retention periods.</li>
+            </ul>
+            <p>The current version does not create user accounts, so it does not have a NovaTune account-deletion process. To remove locally stored app data, clear the app's storage in Android Settings or uninstall NovaTune. For information held by Google, use Google's privacy and advertising controls.</p>
+          </section>
 
-  <h2>10. Changes to this policy</h2>
-  <p>We may update this Privacy Policy when app features, advertising SDKs, legal requirements, or data practices change. The effective date at the top of this page will be updated when a revised policy is published. Please review this page periodically.</p>
+          <section class="section" id="security">
+            <div class="section-head"><span class="section-number">07</span><h2>Security</h2></div>
+            <p>NovaTune uses Android's app permission system and private app storage to protect locally stored app data. The app's reviewed Android configuration disables cleartext network traffic. Google states that data collected by its Google Mobile Ads SDK (Legacy) is encrypted in transit using TLS.</p>
+            <p>No method of storage or transmission is completely secure. We cannot guarantee absolute security, but we aim to use platform protections and the security practices provided by the third-party services integrated into the app.</p>
+          </section>
 
-  <h2>11. Contact</h2>
-  <p>For privacy questions or requests, contact the developer at:</p>
-  <div class="meta">
-    <p><strong>Developer:</strong> MaDuWa</p>
-    <p><strong>Email:</strong> <a href="mailto:devnovastudios@gmail.com">devnovastudios@gmail.com</a></p>
-  </div>
+          <section class="section" id="children">
+            <div class="section-head"><span class="section-number">08</span><h2>Children's privacy</h2></div>
+            <p>NovaTune is a general-purpose music player and is not specifically designed as a child-directed service. The current version has no NovaTune account system and the developer does not knowingly collect children's personal information through user accounts.</p>
+            <p>NovaTune is ad-supported. Google advertising services may process device or advertising information as described in this policy, subject to applicable law, consent requirements and service settings. The app's target-audience declaration and advertising settings must be configured accurately by the developer in Google Play Console and AdMob. This policy does not replace those required declarations or settings.</p>
+          </section>
 
-  <footer>NovaTune · Android package com.brand.novatune · Effective November 2, 2026</footer>
-</main>
+          <section class="section" id="choices">
+            <div class="section-head"><span class="section-number">09</span><h2>Your choices</h2></div>
+            <ul>
+              <li><strong>Music and audio access:</strong> You can allow or deny music/audio permissions through Android's permission prompts and Settings. You can also revoke access later in Android Settings.</li>
+              <li><strong>Visualizer:</strong> You can decline the RECORD_AUDIO permission. Live playback visualizer effects will then be unavailable. You can leave the visualizer screen to stop its audio analysis.</li>
+              <li><strong>Floating player:</strong> You can enable or disable the optional overlay through Android's special app access settings.</li>
+              <li><strong>Local app data:</strong> You can clear NovaTune's app storage or uninstall the app to remove locally stored preferences and playlists.</li>
+              <li><strong>Advertising choices:</strong> When Google's UMP SDK determines that a privacy-options entry point is required, the Privacy Choices option appears in NovaTune Settings. Use it to review or update the privacy choices available in Google's form.</li>
+              <li><strong>Google advertising controls:</strong> You can review available ad-personalization and advertising controls through Android settings and <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Google My Ad Center</a>. Available controls may vary by region, device and Google service.</li>
+            </ul>
+          </section>
+
+          <section class="section" id="changes">
+            <div class="section-head"><span class="section-number">10</span><h2>Changes to this policy</h2></div>
+            <p>We may update this Privacy Policy when NovaTune's features, permissions, advertising SDKs, third-party services, legal requirements or data practices change. When we publish a revised policy, we will update the effective date shown at the top of this page. Please review this page periodically.</p>
+          </section>
+
+          <section class="section" id="contact">
+            <div class="section-head"><span class="section-number">11</span><h2>Contact</h2></div>
+            <p>If you have questions about this Privacy Policy or NovaTune's privacy practices, contact the developer using the details below.</p>
+            <div class="contact-card">
+              <div><strong>MaDuWa</strong><p>Developer / Publisher of NovaTune<br>Android package: com.brand.novatune</p></div>
+              <a class="email-link" href="mailto:devnovastudios@gmail.com" aria-label="Email NovaTune privacy support">✉ &nbsp; devnovastudios@gmail.com</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div><span class="footer-brand">NovaTune</span> &nbsp;·&nbsp; Privacy Policy &nbsp;·&nbsp; Effective November 5, 2026</div>
+      <a class="back-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
 </body>
 </html>
